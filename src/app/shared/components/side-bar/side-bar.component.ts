@@ -13,16 +13,6 @@ export class SideBarComponent implements OnInit {
 
   customOptions: Array<any> = [];
 
-  linksMenu: Array<any> = [
-    {
-      name: 'Home',
-      icon: 'uil-estate'
-    },
-    {
-      name: 'Buscar',
-      icon: 'uil-estate'
-    }
-  ];
 
   constructor() { }
 
