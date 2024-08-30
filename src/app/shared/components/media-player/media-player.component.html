@@ -18,7 +18,7 @@
 <!-- ZONE TEMPLATES -->
 
 <ng-template #artistZone>
-    <div class="artist-inside" *ngIf="true">
+    <div class="artist-inside" *ngIf="multimediaService.trackInfo$ | async as mockCover">
 
         <img [src]="mockCover.cover" alt="" class="cover">
         <div class="track-info">
@@ -30,6 +30,7 @@
                 <i class="uil uil-heart"></i>
             </button>
         </div>
+        
     </div>
 </ng-template>
 
@@ -39,8 +40,8 @@
             <button class="arrow btn">
                 <i class="uil uil-previous"></i>
             </button>
-            <button  class="play btn">
-                <i class="uil"></i>
+            <button (click)="multimediaService.togglePlayer()"  class="play btn">
+                <i [ngClass]="state=='playing'? 'uil-pause-circle': 'uil-play-circle'" class="uil"></i>
 
             </button>
             <button class="arrow btn">
@@ -48,13 +49,12 @@
             </button>
         </div>
         <div class="media-linetime">
-
-            <div class="time">00</div>
+            <div class="time">{{multimediaService.timeElipsed$ | async}}</div>
             <span #progressBar class="time-progress">
-                <span class="time-progress-live" [style.width]="10+'%'">
+                <span class="time-progress-live" [style.width]="(multimediaService.playerPercentage$ | async)+'%'">
                 </span>
             </span>
-            <div class="time">{{99}}</div>
+            <div class="time">{{multimediaService.timeRemaining$ | async}}</div>
         </div>
     </div>
 </ng-template>
